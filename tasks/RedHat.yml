@@ -8,6 +8,14 @@
     - "{{postgresql_pkg_name}}"
     - python-psycopg2
 
+- name: Create dir for Ansible
+  file:
+    path: "/home/{{postgresql_user}}/.ansible/tmp"
+    state: directory
+    owner: "{{postgresql_user}}"
+    group: "{{postgresql_group}}"
+    mode: 0755
+
 - name: Get stats of pg_hba.conf
   stat:
     path: "{{postgresql_cfgdir}}/pg_hba.conf"
@@ -15,7 +23,7 @@
     get_checksum: no
   register: st_pghba
 
-- name: Init the DB
+- name: Init the DB (required sudo with NOPASSWD)
   command: "/usr/bin/initdb -D {{postgresql_datadir}}"
   become: yes
   become_user: "{{postgresql_user}}"
@@ -33,15 +41,15 @@
     state: started
     enabled: yes
 
-- name: Create user for the db
+- name: Create user for the db (required sudo with NOPASSWD)
   become: yes
   become_user: "{{postgresql_user}}"
   postgresql_user:
     name: "{{postgresql_db_user}}"
-    password: "{{postgresql_db_passwd}}"
+    password: "{{postgresql_db_passwd|replace('\n', '')}}"
     state: present
 
-- name: Create database
+- name: Create database (required sudo with NOPASSWD)
   become: yes
   become_user: "{{postgresql_user}}"
   postgresql_db:
