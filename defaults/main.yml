@@ -7,7 +7,7 @@ postgresql_db_user: guest
 postgresql_db_passwd: secret
 
 postgresql_pkg_name: "{{ 'postgresql-server' if ansible_distribution in ['RedHat','CentOS'] else 'postgresql' }}"
-postgresql_pkg_version: "{{ '9.2.23-1.el7_4' if ansible_distribution in ['RedHat','CentOS'] else '9.5+173' }}"
+postgresql_pkg_version: "{{ '9.2.24-1.el7_5' if ansible_distribution in ['RedHat','CentOS'] else '9.5+173' }}"
 postgresql_homedir: "{{ '/var/lib/pgsql' if ansible_distribution in ['RedHat','CentOS'] else '/var/lib/postgresql' }}"
 postgresql_datadir: "{{ '/var/lib/pgsql/data' if ansible_distribution in ['RedHat','CentOS'] else '/var/lib/postgresql/9.5/main' }}"
 postgresql_cfgdir: "{{ '/var/lib/pgsql/data' if ansible_distribution in ['RedHat','CentOS'] else '/etc/postgresql/9.5/main' }}"

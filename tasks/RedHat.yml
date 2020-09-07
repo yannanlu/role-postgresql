@@ -1,5 +1,5 @@
 ---
-- name: Install postgresql package
+- name: Install postgresql packages
   yum:
     name: "{{item}}"
     state: present
