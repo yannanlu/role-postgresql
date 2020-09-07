@@ -6,7 +6,8 @@
     update_cache: yes
   with_items:
     - "{{postgresql_pkg_name}}"
-    - python-psycopg2
+    - postgresql-contrib
+    - python3-psycopg2
 
 - name: Create dir for Ansible
   file:
